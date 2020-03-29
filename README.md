@@ -23,9 +23,9 @@ $ pip install doccano-transformer
 ## Examples
 
 ```python
-from doccano_transformer import Transformer
+from doccano_transformer import Dataset
 from doccano_transformer.tasks import NER
 
-t = Transformer(filepath='example.jsonl', task=NER)
-t.to_spacy()
+d = Dataset(filepath='example.jsonl', task=NER, tokenizer=str.split)
+d.to_spacy()
 ```
