@@ -9,6 +9,7 @@ flake8 = "*"
 isort = {extras = ["pipfile"],version = "*"}
 autopep8 = "*"
 ipython = "*"
+pytest-datadir = "*"
 
 [packages]
 
