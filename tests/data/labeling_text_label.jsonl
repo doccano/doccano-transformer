@@ -1,3 +1,3 @@
-{"id": 2570, "text": "Nadim Ladki", "meta": {}, "annotation_approver": null, "labels": [[0, 5, "B-PER"], [6, 11, "I-PER"]]}
-{"id": 2571, "text": "AL-AIN , United Arab Emirates 1996-12-06", "meta": {}, "annotation_approver": null, "labels": [[0, 6, "B-LOC"], [7, 8, "O"], [9, 15, "B-LOC"], [16, 20, "I-LOC"], [21, 29, "I-LOC"], [30, 40, "O"]]}
-{"id": 2569, "text": "SOCCER - JAPAN GET LUCKY WIN , CHINA IN SURPRISE DEFEAT .", "meta": {}, "annotation_approver": null, "labels": [[0, 6, "O"], [7, 8, "O"], [9, 14, "B-LOC"], [15, 18, "O"], [19, 24, "O"], [25, 28, "O"], [29, 30, "O"], [31, 36, "B-PER"], [37, 39, "O"], [40, 48, "O"], [49, 55, "O"], [56, 57, "O"]]}
+{"id": 2575, "text": "SOCCER - JAPAN GET LUCKY WIN , CHINA IN SURPRISE DEFEAT .", "meta": {}, "annotation_approver": null, "labels": [[9, 14, "LOC"], [31, 36, "PER"]]}
+{"id": 2576, "text": "Nadim Ladki", "meta": {}, "annotation_approver": null, "labels": [[0, 11, "PER"]]}
+{"id": 2577, "text": "AL-AIN , United Arab Emirates 1996-12-06", "meta": {}, "annotation_approver": null, "labels": [[0, 6, "LOC"], [9, 29, "LOC"]]}
