@@ -22,8 +22,7 @@ class Dataset:
             raise FileNotFoundError
 
         self.task = task
-        self.data = task.load(filepath)
-        self.tokenizer = tokenizer
+        self.data = task.load(filepath, tokenizer)
 
     def to_conll2003(self, savepath: str):
         """
