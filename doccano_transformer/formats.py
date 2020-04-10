@@ -50,7 +50,9 @@ class NER(InputFormat):
             ])
         self.labels = labels
         self.annotation_approver = x['annotation_approver']
-        self.default_user = max(labels.keys(), key=lambda user: len(labels[user]))
+        self.default_user = max(
+            labels.keys(), key=lambda user: len(labels[user])
+        )
 
     def to_conll2003(self, user: Optional[int] = None) -> str:
         label = self.labels[user or self.default_user]
