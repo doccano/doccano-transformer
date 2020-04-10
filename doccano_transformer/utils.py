@@ -1,6 +1,6 @@
 import csv
 import json
-from typing import List
+from typing import List, Tuple
 
 
 def load_from_jsonl(filepath: str) -> List[dict]:
@@ -38,3 +38,38 @@ def get_offsets(text: str, tokens: List[str]) -> List[int]:
             if j == 0:
                 offsets.append(i)
     return offsets
+
+
+def create_bio_tags(
+        tokens: List[str],
+        offsets: List[int],
+        labels: List[Tuple[int, int, str]]) -> List[str]:
+    """Create BIT tags from Doccano's label data.
+    Args:
+        tokens (List[str]): The list of the token.
+        offsets (List[str]): The list of the character offset.
+        labels (List[Tuple[int, int, str]]): The list of labels. Each item in
+            the list holds three values which are the start offset, the end
+            offset, and the label name.
+    Returns:
+        (List[str]): The list of the BIO tag.
+    """
+    labels = sorted(labels)
+    n = len(labels)
+    i = 0
+    prefix = 'B-'
+    tags = []
+    for token, token_start in zip(tokens, offsets):
+        token_end = token_start + len(token)
+        if i >= n or token_end < labels[i][0]:
+            tags.append('O')
+        elif token_start > labels[i][1]:
+            tags.append('O')
+        else:
+            tags.append(prefix + str(labels[i][2]))
+            if labels[i][1] > token_end:
+                prefix = 'I-'
+            elif i < n:
+                i += 1
+                prefix = 'B-'
+    return tags
