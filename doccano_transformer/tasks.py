@@ -36,7 +36,7 @@ class NER(Task):
         return cls(raw_data, tokenizer)
 
     def to_conll2003(self, user: Optional[int] = None) -> List[str]:
-        result = ['-DOCSTART- -X- -X- O\n\n']
+        result = []
         for x in self.data:
             line = x.to_conll2003(user)
             if not line:
