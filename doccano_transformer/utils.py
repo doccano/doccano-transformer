@@ -1,6 +1,6 @@
 import csv
 import json
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 
 def load_from_jsonl(filepath: str) -> List[dict]:
@@ -18,13 +18,21 @@ def save_to_text(lines: List[str], filepath: str) -> None:
         f.writelines(lines)
 
 
-def get_offsets(text: str, tokens: List[str]) -> List[int]:
+def split_sentences(text: str) -> List[str]:
+    return text.split('\n')
+
+
+def get_offsets(
+        text: str,
+        tokens: List[str],
+        start: Optional[int] = 0) -> List[int]:
     """Calculate char offsets of each tokens.
 
     Args:
         text (str): The string before tokenized.
         tokens (List[str]): The list of the string. Each string corresponds
             token.
+        start (Optional[int]): The start position.
     Returns:
         (List[str]): The list of the offset.
     """
@@ -36,7 +44,7 @@ def get_offsets(text: str, tokens: List[str]) -> List[int]:
             while char != text[i]:
                 i += 1
             if j == 0:
-                offsets.append(i)
+                offsets.append(i + start)
     return offsets
 
 
