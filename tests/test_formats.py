@@ -40,5 +40,6 @@ class TestNERTextLabel(TestCase):
         x = {"id": 2576, 'text': 'Nadim Ladki', 'meta': {},
              'annotation_approver': {}, 'labels': [[0, 11, 'PER']]}
         result = formats.NERTextLabel(x, str.split).to_conll2003(user=-1)
-        expected = '-DOCSTART- -X- -X- O\n\nNadim _ _ B-PER\nLadki _ _ I-PER\n\n'
+        expected = \
+            '-DOCSTART- -X- -X- O\n\nNadim _ _ B-PER\nLadki _ _ I-PER\n\n'
         self.assertEqual(result, expected)
