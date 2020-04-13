@@ -27,11 +27,11 @@ class TestNER(TestCase):
             {'label': 4, 'start_offset': 6, 'end_offset': 11, 'user': 2}
         ]}
         result = formats.NER(x, str.split).to_conll2003(user=1)
-        expected = 'Nadim _ _ B-2\nLadki _ _ O\n\n'
+        expected = '-DOCSTART- -X- -X- O\n\nNadim _ _ B-2\nLadki _ _ O\n\n'
         self.assertEqual(result, expected)
 
         result = formats.NER(x, str.split).to_conll2003(user=2)
-        expected = 'Nadim _ _ O\nLadki _ _ B-4\n\n'
+        expected = '-DOCSTART- -X- -X- O\n\nNadim _ _ O\nLadki _ _ B-4\n\n'
         self.assertEqual(result, expected)
 
 
@@ -40,5 +40,5 @@ class TestNERTextLabel(TestCase):
         x = {"id": 2576, 'text': 'Nadim Ladki', 'meta': {},
              'annotation_approver': {}, 'labels': [[0, 11, 'PER']]}
         result = formats.NERTextLabel(x, str.split).to_conll2003(user=-1)
-        expected = 'Nadim _ _ B-PER\nLadki _ _ I-PER\n\n'
+        expected = '-DOCSTART- -X- -X- O\n\nNadim _ _ B-PER\nLadki _ _ I-PER\n\n'
         self.assertEqual(result, expected)
