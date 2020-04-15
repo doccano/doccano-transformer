@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 import pytest
+
 from doccano_transformer import Dataset
 from doccano_transformer.tasks import NER
 
