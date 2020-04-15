@@ -57,14 +57,11 @@ class NER(InputFormat):
             ])
         self.labels = labels
         self.annotation_approver = x['annotation_approver']
-        self.default_user = max(
-            labels.keys(), key=lambda user: len(labels[user])
-        )
 
     def to_conll2003(self, user: Optional[int] = None) -> str:
-        labels = self.labels[user or self.default_user]
-        if not labels:
+        if user not in self.labels:
             return None
+        labels = self.labels[user]
         label_split = [[] for _ in range(len(self.sentences))]
         for label in labels:
             for i, (start, end) in enumerate(
@@ -109,7 +106,6 @@ class NERTextLabel(NER):
             labels[-1].append(label)
         self.labels = labels
         self.annotation_approver = x['annotation_approver']
-        self.default_user = -1
 
 
 class OutputFormat(Enum):
