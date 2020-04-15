@@ -35,11 +35,22 @@ class NER(Task):
         raw_data: List[dict] = utils.load_from_jsonl(filepath)
         return cls(raw_data, tokenizer)
 
+    @property
+    def users(self) -> List[int]:
+        users = set()
+        for x in self.data:
+            for user in x.labels:
+                if user not in users:
+                    users.add(user)
+        return sorted(users)
+
     def to_conll2003(self, user: Optional[int] = None) -> List[str]:
+        users = [user] if user is not None else self.users
         result = []
         for x in self.data:
-            line = x.to_conll2003(user)
-            if not line:
-                continue
-            result.append(line)
+            for user in users:
+                line = x.to_conll2003(user)
+                if not line:
+                    continue
+                result.append(line)
         return result
