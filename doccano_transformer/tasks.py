@@ -1,3 +1,4 @@
+import json
 from typing import Callable, List, Optional
 
 from . import formats, utils
@@ -53,4 +54,15 @@ class NER(Task):
                 if not line:
                     continue
                 result.append(line)
+        return result
+
+    def to_spacy(self, user: Optional[int] = None) -> List[str]:
+        users = [user] if user is not None else self.users
+        result = []
+        for x in self.data:
+            for user in users:
+                line = x.to_spacy(user)
+                if not line:
+                    continue
+                result.append(json.loads(line))
         return result
