@@ -43,3 +43,22 @@ class Dataset:
                     )
                 else:
                     utils.save_to_text(converted_data, savepath)
+
+    def to_spacy(self, savepath: str) -> None:
+        """Convert the exported Doccano file to CoNLL2003 format.
+        Args:
+            savepath (str): The path to save the file converted to
+                CoNLL2003 format.
+        """
+        if OutputFormat.SpaCy not in self.task.allowed_output_formats:
+            raise NotSupportedOutputFormatError
+        else:
+            use_suffix = len(self.data.users) > 1
+            for user in self.data.users:
+                converted_data = self.data.to_spacy(user)
+                if use_suffix:
+                    utils.save_to_json(
+                        converted_data, savepath + f'.user{user}'
+                    )
+                else:
+                    utils.save_to_json(converted_data, savepath)

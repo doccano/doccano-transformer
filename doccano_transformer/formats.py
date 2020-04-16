@@ -1,6 +1,9 @@
+import json
 from collections import defaultdict
 from enum import Enum
 from typing import Callable, List, Optional
+
+from spacy.gold import biluo_tags_from_offsets
 
 from doccano_transformer import utils
 
@@ -37,6 +40,7 @@ class NER(InputFormat):
             raise NotSupportedInputFormatError
 
         self.id = x['id']
+        self.text = x['text']
         self.sentences = utils.split_sentences(x['text'])
         self.sentence_offsets = utils.get_offsets(x['text'], self.sentences)
         self.sentence_offsets.append(len(x['text']))
@@ -78,6 +82,34 @@ class NER(InputFormat):
             lines.append('\n')
         return ''.join(lines)
 
+    def to_spacy(self, user: int) -> str:
+        if user not in self.labels:
+            return None
+        labels = self.labels[user]
+        label_split = [[] for _ in range(len(self.sentences))]
+        for label in labels:
+            for i, (start, end) in enumerate(
+                    zip(self.sentence_offsets, self.sentence_offsets[1:])):
+                if start <= label[0] <= label[1] <= end:
+                    label_split[i].append(label)
+
+        data = {'raw': self.text}
+        sentences = []
+        for tokens, offsets, label in zip(
+                self.tokens, self.token_offsets, label_split):
+            tokens = utils.convert_tokens_and_offsets_to_spacy_tokens(
+                tokens, offsets
+            )
+            tags = biluo_tags_from_offsets(tokens, label)
+            tokens_for_spacy = []
+            for i, (token, tag, offset) in enumerate(zip(tokens, tags, offsets)):
+                tokens_for_spacy.append(
+                    {'id': i, 'orth': str(token), 'ner': tag}
+                )
+            sentences.append({'tokens': tokens_for_spacy})
+        data['sentences'] = sentences
+        return json.dumps({'id': self.id, 'paragraphs': [data]})
+
 
 class NERTextLabel(NER):
 
@@ -88,6 +120,7 @@ class NERTextLabel(NER):
             raise NotSupportedInputFormatError
 
         self.id = x['id']
+        self.text = x['text']
         self.sentences = utils.split_sentences(x['text'])
         self.sentence_offsets = utils.get_offsets(x['text'], self.sentences)
         self.sentence_offsets.append(len(x['text']))
