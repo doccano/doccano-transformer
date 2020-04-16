@@ -19,3 +19,17 @@ class TestUtils(TestCase):
         result = utils.create_bio_tags(tokens, offsets, labels)
         expected = ['O', 'O', 'B-SOFTWARE', 'I-SOFTWARE', 'O']
         self.assertListEqual(result, expected)
+
+    def test_convert_tokens_and_offsets_to_spacy_tokens(self):
+        tokens = 'This is Doccano Transformer .'.split()
+        offsets = [0, 5, 8, 16, 28]
+        spacy_tokens = utils.convert_tokens_and_offsets_to_spacy_tokens(
+            tokens, offsets
+        )
+        for i, (spacy_token, token, offset) in enumerate(
+            zip(spacy_tokens, tokens, offsets)
+        ):
+            self.assertEqual(str(spacy_token), token)
+            self.assertEqual(len(spacy_token), len(token))
+            self.assertEqual(spacy_token.i, i)
+            self.assertEqual(spacy_token.idx, offset)
