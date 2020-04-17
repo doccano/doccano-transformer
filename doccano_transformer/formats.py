@@ -102,7 +102,9 @@ class NER(InputFormat):
             )
             tags = biluo_tags_from_offsets(tokens, label)
             tokens_for_spacy = []
-            for i, (token, tag, offset) in enumerate(zip(tokens, tags, offsets)):
+            for i, (token, tag, offset) in enumerate(
+                zip(tokens, tags, offsets)
+            ):
                 tokens_for_spacy.append(
                     {'id': i, 'orth': str(token), 'ner': tag}
                 )
