@@ -10,7 +10,7 @@ class TestDataset(TestCase):
 
     @pytest.fixture(autouse=True)
     def initdir(self, shared_datadir, tmpdir):
-        self.shared_datadir = shared_datadir
+        self.shared_datadir = shared_datadir / 'labeling'
         self.tmpdir = tmpdir
 
     def test_from_labeling_text_label_jsonl_to_conll2003(self):
