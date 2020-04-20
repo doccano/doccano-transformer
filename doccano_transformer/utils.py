@@ -1,6 +1,6 @@
 import csv
 import json
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 
 
 def load_from_jsonl(filepath: str) -> List[dict]:
@@ -16,6 +16,11 @@ def load_from_csv(filepath: str) -> List[dict]:
 def save_to_text(lines: List[str], filepath: str) -> None:
     with open(filepath, 'w') as f:
         f.writelines(lines)
+
+
+def save_to_json(data: Any, filepath: str) -> None:
+    with open(filepath, 'w') as f:
+        json.dump(data, f, indent=4)
 
 
 def split_sentences(text: str) -> List[str]:
@@ -81,3 +86,39 @@ def create_bio_tags(
                 i += 1
                 prefix = 'B-'
     return tags
+
+
+class Token:
+    def __init__(self, token: str, offset: int, i: int) -> None:
+        self.token = token
+        self.idx = offset
+        self.i = i
+
+    def __len__(self):
+        return len(self.token)
+
+    def __str__(self):
+        return self.token
+
+
+def convert_tokens_and_offsets_to_spacy_tokens(
+    tokens: List[str], offsets: List[int]
+) -> List[Token]:
+    """Convert tokens and offsets to the list of SpaCy compatible object.
+    Asrgs:
+        tokens (List[str]): The list of tokens.
+        offsets (List[int]): The list of offsets.
+    Returns:
+        (List[Token]): The list of the SpaCy compatible object.
+    Examples:
+        >>> from doccano_transformer import utils
+        >>> tokens = ['This', 'is', 'Doccano', 'Transformer', '.']
+        >>> offsets = [0, 5, 8, 16, 28]
+        >>> utils.convert_tokens_and_offsets_to_spacy_tokens(tokens, offsets)
+    """
+    if len(tokens) != len(offsets):
+        raise ValueError('tokens size should equal to offsets size')
+    spacy_tokens = []
+    for i, (token, offset) in enumerate(zip(tokens, offsets)):
+        spacy_tokens.append(Token(token, offset, i))
+    return spacy_tokens
