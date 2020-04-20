@@ -1,0 +1,4 @@
+{"id": 2584, "text": "example", "annotations": [{"label": 17, "user": 1}], "meta": {"wikiPageID": 1}, "annotation_approver": null}
+{"id": 2585, "text": "example", "annotations": [{"label": 17, "user": 1}, {"label": 15, "user": 1}], "meta": {"wikiPageID": 2}, "annotation_approver": null}
+{"id": 2586, "text": "example", "annotations": [{"label": 15, "user": 1}], "meta": {"wikiPageID": 3}, "annotation_approver": null}
+{"id": 2587, "text": "example", "annotations": [{"label": 16, "user": 1}], "meta": {"wikiPageID": 4}, "annotation_approver": null}
