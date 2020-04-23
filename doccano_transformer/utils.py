@@ -1,18 +1,19 @@
-import csv
-import json
-from typing import List
+from typing import Optional
+
+from doccano_transformer.datasets import Dataset
 
 
-def load_from_jsonl(filepath: str) -> List[dict]:
-    with open(filepath) as f:
-        return list(map(json.loads, f))
+def read_jsonl(
+        filepath: str,
+        dataset: Dataset,
+        encoding: Optional[str] = 'utf-8'
+) -> Dataset:
+    return dataset.from_jsonl(filepath, encoding)
 
 
-def load_from_csv(filepath: str) -> List[dict]:
-    with open(filepath) as f:
-        return list(csv.DictReader(f))
-
-
-def save_to_text(lines: List[str], filepath: str) -> None:
-    with open(filepath, 'w') as f:
-        f.writelines(lines)
+def read_csv(
+        filepath: str,
+        dataset: Dataset,
+        encoding: Optional[str] = 'utf-8'
+) -> Dataset:
+    return dataset.from_csv(filepath, encoding)

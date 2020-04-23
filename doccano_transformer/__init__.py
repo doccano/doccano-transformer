@@ -1,1 +1,1 @@
-from .dataset import Dataset  # NOQA
+from .datasets import Dataset  # NOQA
