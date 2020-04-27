@@ -12,6 +12,7 @@ ipython = "*"
 pytest-datadir = "*"
 
 [packages]
+spacy = "*"
 
 [requires]
 python_version = "3.6"
