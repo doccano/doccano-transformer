@@ -1,26 +1,23 @@
-import csv
-import json
-from typing import Any, List, Optional, Tuple
+from typing import TYPE_CHECKING, List, Optional, Tuple
+
+if TYPE_CHECKING:
+    from doccano_transformer.datasets import Dataset
 
 
-def load_from_jsonl(filepath: str) -> List[dict]:
-    with open(filepath) as f:
-        return list(map(json.loads, f))
+def read_jsonl(
+        filepath: str,
+        dataset: 'Dataset',
+        encoding: Optional[str] = 'utf-8'
+) -> 'Dataset':
+    return dataset.from_jsonl(filepath, encoding)
 
 
-def load_from_csv(filepath: str) -> List[dict]:
-    with open(filepath) as f:
-        return list(csv.DictReader(f))
-
-
-def save_to_text(lines: List[str], filepath: str) -> None:
-    with open(filepath, 'w') as f:
-        f.writelines(lines)
-
-
-def save_to_json(data: Any, filepath: str) -> None:
-    with open(filepath, 'w') as f:
-        json.dump(data, f, indent=4)
+def read_csv(
+        filepath: str,
+        dataset: 'Dataset',
+        encoding: Optional[str] = 'utf-8'
+) -> 'Dataset':
+    return dataset.from_csv(filepath, encoding)
 
 
 def split_sentences(text: str) -> List[str]:
@@ -32,7 +29,6 @@ def get_offsets(
         tokens: List[str],
         start: Optional[int] = 0) -> List[int]:
     """Calculate char offsets of each tokens.
-
     Args:
         text (str): The string before tokenized.
         tokens (List[str]): The list of the string. Each string corresponds

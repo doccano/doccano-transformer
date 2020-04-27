@@ -26,4 +26,4 @@ jobs:
         pipenv run isort -c
     - name: Test with pytest
       run: |
-        pipenv run pytest tests
+        pipenv run pytest --cov=doccano_transformer tests

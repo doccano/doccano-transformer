@@ -1,3 +1,3 @@
-{"id": 2581, "text": "example", "annotations": [{"text": "example1", "user": 1}, {"text": "example2", "user": 1}], "meta": {"wikiPageID": 1}, "annotation_approver": null}
-{"id": 2582, "text": "example", "annotations": [{"text": "example", "user": 1}], "meta": {"wikiPageID": 2}, "annotation_approver": null}
-{"id": 2583, "text": "example", "annotations": [{"text": "example", "user": 1}], "meta": {"wikiPageID": 3}, "annotation_approver": null}
+{"id": 2588, "text": "i can 't tell who will arrive first .", "annotations": [{"text": "誰 が 一番 に 着 く か 私 に は 分か り ま せ ん 。", "user": 1}], "meta": {}, "annotation_approver": null}
+{"id": 2589, "text": "many animals have been destroyed by men .", "annotations": [{"text": "多く の 動物 が 人間 に よ っ て 滅ぼ さ れ た 。", "user": 2}], "meta": {}, "annotation_approver": null}
+{"id": 2590, "text": "i 'm in the tennis club .", "annotations": [{"text": "私 は テニス 部員 で す 。", "user": 1}], "meta": {}, "annotation_approver": null}

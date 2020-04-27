@@ -1,4 +1,3 @@
-{"id": 2584, "text": "example", "annotations": [{"label": 17, "user": 1}], "meta": {"wikiPageID": 1}, "annotation_approver": null}
-{"id": 2585, "text": "example", "annotations": [{"label": 17, "user": 1}, {"label": 15, "user": 1}], "meta": {"wikiPageID": 2}, "annotation_approver": null}
-{"id": 2586, "text": "example", "annotations": [{"label": 15, "user": 1}], "meta": {"wikiPageID": 3}, "annotation_approver": null}
-{"id": 2587, "text": "example", "annotations": [{"label": 16, "user": 1}], "meta": {"wikiPageID": 4}, "annotation_approver": null}
+{"id": 2591, "text": "Terrible customer service.", "annotations": [{"label": 15, "user": 1}], "meta": {}, "annotation_approver": null}
+{"id": 2592, "text": "Really great transaction.", "annotations": [{"label": 17, "user": 1}], "meta": {}, "annotation_approver": null}
+{"id": 2593, "text": "Great price.", "annotations": [{"label": 17, "user": 1}], "meta": {}, "annotation_approver": null}
