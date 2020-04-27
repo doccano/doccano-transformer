@@ -27,6 +27,12 @@ class Dataset:
     ) -> 'Dataset':
         return cls(filepath, encoding, lambda f: map(json.loads, f))
 
+    @classmethod
+    def from_csv(
+        cls, filepath: str, encoding: Optional[str] = 'utf-8'
+    ) -> 'Dataset':
+        return cls(filepath, encoding, csv.DictReader)
+
 
 class TaskDataset(Dataset):
     example_class: Example = None
@@ -40,12 +46,6 @@ class TaskDataset(Dataset):
 
 class NERDataset(TaskDataset):
     example_class = NERExample
-
-    @classmethod
-    def from_csv(
-        cls, filepath: str, encoding: Optional[str] = 'utf-8'
-    ) -> 'NERDataset':
-        return cls(filepath, encoding, csv.DictReader)
 
     def to_spacy(
         self, filepath: str, tokenizer: Callable[[str], List[str]]
