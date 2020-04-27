@@ -1,0 +1,231 @@
+[
+    {
+        "id": 2578,
+        "paragraphs": [
+            {
+                "raw": "SOCCER - JAPAN GET LUCKY WIN , CHINA IN SURPRISE DEFEAT .\nNadim Ladki\nAL-AIN , United Arab Emirates 1996-12-06",
+                "sentences": [
+                    {
+                        "tokens": [
+                            {
+                                "id": 0,
+                                "orth": "SOCCER",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 1,
+                                "orth": "-",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 2,
+                                "orth": "JAPAN",
+                                "ner": "U-LOC"
+                            },
+                            {
+                                "id": 3,
+                                "orth": "GET",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 4,
+                                "orth": "LUCKY",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 5,
+                                "orth": "WIN",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 6,
+                                "orth": ",",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 7,
+                                "orth": "CHINA",
+                                "ner": "U-PER"
+                            },
+                            {
+                                "id": 8,
+                                "orth": "IN",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 9,
+                                "orth": "SURPRISE",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 10,
+                                "orth": "DEFEAT",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 11,
+                                "orth": ".",
+                                "ner": "O"
+                            }
+                        ]
+                    },
+                    {
+                        "tokens": [
+                            {
+                                "id": 0,
+                                "orth": "Nadim",
+                                "ner": "B-PER"
+                            },
+                            {
+                                "id": 1,
+                                "orth": "Ladki",
+                                "ner": "L-PER"
+                            }
+                        ]
+                    },
+                    {
+                        "tokens": [
+                            {
+                                "id": 0,
+                                "orth": "AL-AIN",
+                                "ner": "U-LOC"
+                            },
+                            {
+                                "id": 1,
+                                "orth": ",",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 2,
+                                "orth": "United",
+                                "ner": "B-LOC"
+                            },
+                            {
+                                "id": 3,
+                                "orth": "Arab",
+                                "ner": "I-LOC"
+                            },
+                            {
+                                "id": 4,
+                                "orth": "Emirates",
+                                "ner": "L-LOC"
+                            },
+                            {
+                                "id": 5,
+                                "orth": "1996-12-06",
+                                "ner": "O"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2580,
+        "paragraphs": [
+            {
+                "raw": "RUGBY UNION - CUTTITTA BACK FOR ITALY AFTER A YEAR .\nROME 1996-12-06\nItaly recalled Marcello Cuttitta",
+                "sentences": [
+                    {
+                        "tokens": [
+                            {
+                                "id": 0,
+                                "orth": "RUGBY",
+                                "ner": "B-ORG"
+                            },
+                            {
+                                "id": 1,
+                                "orth": "UNION",
+                                "ner": "L-ORG"
+                            },
+                            {
+                                "id": 2,
+                                "orth": "-",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 3,
+                                "orth": "CUTTITTA",
+                                "ner": "U-PER"
+                            },
+                            {
+                                "id": 4,
+                                "orth": "BACK",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 5,
+                                "orth": "FOR",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 6,
+                                "orth": "ITALY",
+                                "ner": "U-LOC"
+                            },
+                            {
+                                "id": 7,
+                                "orth": "AFTER",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 8,
+                                "orth": "A",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 9,
+                                "orth": "YEAR",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 10,
+                                "orth": ".",
+                                "ner": "O"
+                            }
+                        ]
+                    },
+                    {
+                        "tokens": [
+                            {
+                                "id": 0,
+                                "orth": "ROME",
+                                "ner": "U-LOC"
+                            },
+                            {
+                                "id": 1,
+                                "orth": "1996-12-06",
+                                "ner": "O"
+                            }
+                        ]
+                    },
+                    {
+                        "tokens": [
+                            {
+                                "id": 0,
+                                "orth": "Italy",
+                                "ner": "U-LOC"
+                            },
+                            {
+                                "id": 1,
+                                "orth": "recalled",
+                                "ner": "O"
+                            },
+                            {
+                                "id": 2,
+                                "orth": "Marcello",
+                                "ner": "B-PER"
+                            },
+                            {
+                                "id": 3,
+                                "orth": "Cuttitta",
+                                "ner": "L-PER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,6 +1,4 @@
-annotation_approver,id,label,meta.wikiPageID,text,user
-,2584,17,1,example,1
-,2585,17,2,example,1
-,2585,15,2,example,1
-,2586,15,3,example,1
-,2587,16,4,example,1
+annotation_approver,id,label,text,user
+,2591,15,Terrible customer service.,1
+,2592,17,Really great transaction.,1
+,2593,17,Great price.,1
