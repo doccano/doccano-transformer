@@ -1,5 +1,7 @@
 # doccano-transformer
 
+[![Build Status](https://github.com/doccano/doccano-transformer/workflows/CI/badge.svg)](https://github.com/doccano/doccano-transformer/actions)
+
 Doccano Transformer helps you to transform an exported dataset into the format of your favorite machine learning library.
 
 ## Support formats
