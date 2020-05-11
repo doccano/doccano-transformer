@@ -19,14 +19,6 @@ To install `doccano-transformer`, simply use `pip`:
 pip install doccano-transformer
 ```
 
-Or setup `doccano-transformer` from the source:
-
-```bash
-git clone https://github.com/doccano/doccano-transformer.git
-cd doccano-transformer
-pipenv install
-```
-
 ## Examples
 
 ### Named Entity Recognition
