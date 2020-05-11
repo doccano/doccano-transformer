@@ -8,11 +8,8 @@ Doccano Transformer helps you to transform an exported dataset into the format o
 
 Doccano Transformer supports the following formats:
 
-* CSV
-* CoNLL 2003
-* JSON
-* JSON Lines
-* SpaCy
+* CoNLL 2003(NER)
+* spaCy(NER)
 
 ## Install
 
@@ -24,10 +21,19 @@ $ pip install doccano-transformer
 
 ## Examples
 
-```python
-from doccano_transformer import Dataset
-from doccano_transformer.tasks import NER
+### CoNLL 2003(NER)
 
-d = Dataset(filepath='example.jsonl', task=NER, tokenizer=str.split)
-d.to_spacy()
+```python
+from doccano_transformer.datasets import NERDataset
+from doccano_transformer.utils import read_jsonl
+
+d = read_jsonl(filepath='example.jsonl', dataset=NERDataset, encoding='utf-8')
+d.to_conll2003(tokenizer=str.split)
+```
+
+### SpaCy(NER)
+
+```python
+d = read_jsonl(filepath='example.jsonl', dataset=NERDataset, encoding='utf-8')
+d.spacy(tokenizer=str.split)
 ```
