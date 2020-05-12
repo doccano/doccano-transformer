@@ -1,5 +1,6 @@
 # doccano-transformer
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9fe17d104b644a53a3fe189433d3c797)](https://app.codacy.com/gh/doccano/doccano-transformer?utm_source=github.com&utm_medium=referral&utm_content=doccano/doccano-transformer&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://github.com/doccano/doccano-transformer/workflows/CI/badge.svg)](https://github.com/doccano/doccano-transformer/actions)
 
 Doccano Transformer helps you to transform an exported dataset into the format of your favorite machine learning library.
