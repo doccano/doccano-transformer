@@ -29,6 +29,7 @@ def get_offsets(
         tokens: List[str],
         start: Optional[int] = 0) -> List[int]:
     """Calculate char offsets of each tokens.
+
     Args:
         text (str): The string before tokenized.
         tokens (List[str]): The list of the string. Each string corresponds
@@ -38,8 +39,7 @@ def get_offsets(
         (List[str]): The list of the offset.
     """
     offsets = []
-    m, n = map(len, (text, tokens))
-    i = j = 0
+    i = 0
     for token in tokens:
         for j, char in enumerate(token):
             while char != text[i]:
@@ -53,7 +53,8 @@ def create_bio_tags(
         tokens: List[str],
         offsets: List[int],
         labels: List[Tuple[int, int, str]]) -> List[str]:
-    """Create BIT tags from Doccano's label data.
+    """Create BI tags from Doccano's label data.
+
     Args:
         tokens (List[str]): The list of the token.
         offsets (List[str]): The list of the character offset.
@@ -101,6 +102,7 @@ def convert_tokens_and_offsets_to_spacy_tokens(
     tokens: List[str], offsets: List[int]
 ) -> List[Token]:
     """Convert tokens and offsets to the list of SpaCy compatible object.
+
     Asrgs:
         tokens (List[str]): The list of tokens.
         offsets (List[int]): The list of offsets.
