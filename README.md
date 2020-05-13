@@ -37,3 +37,11 @@ dataset = read_jsonl(filepath='example.jsonl', dataset=NERDataset, encoding='utf
 dataset.to_conll2003(tokenizer=str.split)
 dataset.to_spacy(tokenizer=str.split)
 ```
+
+## Contribution
+
+We encourage you to contribute to doccano transformer! Please check out the [Contributing to doccano transformer guide](https://github.com/doccano/doccano-transformer/blob/master/CONTRIBUTING.md) for guidelines about how to proceed. 
+
+## License
+
+[MIT](https://github.com/doccano/doccano-transformer/blob/master/LICENSE)
