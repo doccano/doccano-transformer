@@ -1,5 +1,5 @@
 import json
-from typing import TYPE_CHECKING, List, Optional, Tuple, Dict
+from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 
 if TYPE_CHECKING:
     from doccano_transformer.datasets import Dataset
@@ -129,4 +129,3 @@ def read_labels(labels_filepath: str) -> Dict:
     for label in labels_doccano:
         labels_mapping[label['id']] = label['text']
     return labels_mapping
-

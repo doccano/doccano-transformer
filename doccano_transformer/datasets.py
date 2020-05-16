@@ -2,8 +2,8 @@ import csv
 import json
 from typing import Any, Callable, Iterable, Iterator, List, Optional, TextIO
 
-from doccano_transformer.examples import Example, NERExample, \
-    TextClassificationExample
+from doccano_transformer.examples import (Example, NERExample,
+                                          TextClassificationExample)
 from doccano_transformer.utils import read_labels
 
 
@@ -89,4 +89,4 @@ class TextClassificationDataset(TaskDataset):
 
     def to_fasttext(self) -> Iterator[str]:
         for example in self:
-            yield example.to_fasttext() 
+            yield example.to_fasttext()
