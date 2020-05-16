@@ -2,8 +2,9 @@ import os
 from collections import defaultdict
 from typing import Callable, Dict, Iterator, List, Optional
 
-from doccano_transformer import utils
 from spacy.gold import biluo_tags_from_offsets
+
+from doccano_transformer import utils
 
 
 class Example:

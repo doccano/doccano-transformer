@@ -3,7 +3,6 @@ from collections import defaultdict
 from unittest import TestCase
 
 import pytest
-
 from doccano_transformer.datasets import NERDataset
 
 
