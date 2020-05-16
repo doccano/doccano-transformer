@@ -1,10 +1,9 @@
 import os
 from collections import defaultdict
-from typing import Callable, Iterator, List, Optional
-
-from spacy.gold import biluo_tags_from_offsets
+from typing import Callable, Dict, Iterator, List, Optional
 
 from doccano_transformer import utils
+from spacy.gold import biluo_tags_from_offsets
 
 
 class Example:
@@ -114,7 +113,13 @@ class NERExample:
 
 class TextClassificationExample(Example):
 
-    def __init__(self, raw, labels):
+    def __init__(self, raw, labels: Dict) -> None:
+        """
+        Example class for text classification projects
+        Args:
+            raw: example in a for of dict
+            labels: mapping of labels from id to text
+        """
         self.raw = raw
         self.labels = labels
         self.annotations = self.raw['annotations']
@@ -122,7 +127,7 @@ class TextClassificationExample(Example):
     def is_valid(self, raise_exception: Optional[bool] = True) -> None:
         return True
 
-    def _append_label_text(self, label_id: str) -> str:
+    def _append_label_text(self, label_id: int) -> str:
         return f'__label__{self.labels[label_id]} '
 
     def _create_label_tags(self):

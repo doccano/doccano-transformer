@@ -69,6 +69,14 @@ class TextClassificationDataset(TaskDataset):
         str] = 'utf-8',
                  transformation_func: Optional[
                      Callable[[TextIO], Iterable[Any]]] = None) -> None:
+        """
+        Dataset for converting text classification annotations
+        Args:
+            filepath: path to exported annotations
+            labels_filepath: path to exported label metadata
+            encoding: encoding of the annotation file
+            transformation_func: additional tranformation function
+        """
         super().__init__(filepath, encoding, transformation_func)
         self.labels_filepath = labels_filepath
         self.labels = read_labels(self.labels_filepath)
@@ -82,7 +90,7 @@ class TextClassificationDataset(TaskDataset):
             json.loads, f))
 
     def __iter__(self) -> Iterator[Example]:
-        for raw in super(TaskDataset, self).__iter__():
+        for raw in super(TextClassificationDataset, self).__iter__():
             example = self.example_class(raw, self.labels)
             example.is_valid(raise_exception=True)
             yield example
