@@ -1,3 +1,4 @@
+import os
 from collections import defaultdict
 from typing import Callable, Iterator, List, Optional
 
@@ -7,7 +8,7 @@ from doccano_transformer import utils
 
 
 class Example:
-    def is_valid(self, raise_exception: Optional[bool] = True) -> None:
+    def is_valid(self, raise_exception: Optional[bool] = True) -> bool:
         raise NotImplementedError
 
 
@@ -58,7 +59,7 @@ class NERExample:
         return True
 
     def to_conll2003(
-        self, tokenizer: Callable[[str], List[str]]
+            self, tokenizer: Callable[[str], List[str]]
     ) -> Iterator[dict]:
         all_tokens, all_token_offsets = self.get_tokens_and_token_offsets(
             tokenizer)
@@ -79,7 +80,7 @@ class NERExample:
             yield {'user': user, 'data': ''.join(lines)}
 
     def to_spacy(
-        self, tokenizer: Callable[[str], List[str]]
+            self, tokenizer: Callable[[str], List[str]]
     ) -> Iterator[dict]:
         all_tokens, all_token_offsets = self.get_tokens_and_token_offsets(
             tokenizer)
@@ -101,7 +102,7 @@ class NERExample:
                 tags = biluo_tags_from_offsets(tokens, label)
                 tokens_for_spacy = []
                 for i, (token, tag, offset) in enumerate(
-                    zip(tokens, tags, offsets)
+                        zip(tokens, tags, offsets)
                 ):
                     tokens_for_spacy.append(
                         {'id': i, 'orth': str(token), 'ner': tag}
@@ -109,3 +110,24 @@ class NERExample:
                 sentences.append({'tokens': tokens_for_spacy})
             data['sentences'] = sentences
             yield {'user': user, 'data': {'id': self.id, 'paragraphs': [data]}}
+
+
+class TextClassificationExample(Example):
+
+    def __init__(self, raw, labels):
+        self.raw = raw
+        self.labels = labels
+        self.annotations = self.raw['annotations']
+
+    def is_valid(self, raise_exception: Optional[bool] = True) -> None:
+        return True
+
+    def _append_label_text(self, label_id: str) -> str:
+        return f'__label__{self.labels[label_id]} '
+
+    def _create_label_tags(self):
+        return ''.join(self._append_label_text(annotation['label'])
+                       for annotation in self.annotations)
+
+    def to_fasttext(self):
+        return self._create_label_tags() + self.raw['text'] + os.linesep

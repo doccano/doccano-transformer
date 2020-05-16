@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, List, Optional, Tuple
+import json
+from typing import TYPE_CHECKING, List, Optional, Tuple, Dict
 
 if TYPE_CHECKING:
     from doccano_transformer.datasets import Dataset
@@ -99,7 +100,7 @@ class Token:
 
 
 def convert_tokens_and_offsets_to_spacy_tokens(
-    tokens: List[str], offsets: List[int]
+        tokens: List[str], offsets: List[int]
 ) -> List[Token]:
     """Convert tokens and offsets to the list of SpaCy compatible object.
 
@@ -120,3 +121,12 @@ def convert_tokens_and_offsets_to_spacy_tokens(
     for i, (token, offset) in enumerate(zip(tokens, offsets)):
         spacy_tokens.append(Token(token, offset, i))
     return spacy_tokens
+
+
+def read_labels(labels_filepath: str) -> Dict:
+    labels_doccano = json.load(open(labels_filepath, mode='r'))
+    labels_mapping = {}
+    for label in labels_doccano:
+        labels_mapping[label['id']] = label['text']
+    return labels_mapping
+
