@@ -69,8 +69,8 @@ class TextClassificationDataset(TaskDataset):
         str] = 'utf-8',
                  transformation_func: Optional[
                      Callable[[TextIO], Iterable[Any]]] = None) -> None:
-        """
-        Dataset for converting text classification annotations
+        """Dataset for converting text classification annotations
+
         Args:
             filepath: path to exported annotations
             labels_filepath: path to exported label metadata

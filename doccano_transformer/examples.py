@@ -115,8 +115,8 @@ class NERExample:
 class TextClassificationExample(Example):
 
     def __init__(self, raw, labels: Dict) -> None:
-        """
-        Example class for text classification projects
+        """Example class for text classification projects
+        
         Args:
             raw: example in a for of dict
             labels: mapping of labels from id to text
