@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='doccano-transformer',
-    version='1.0.0',
+    version='1.0.1',
     description='Format transformer tool for doccano',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -29,7 +29,7 @@ setup(
         'Programming Language :: Python :: 3 :: Only',
     ],
     keywords='doccano,annotation,machine learning',
-    packages=find_packages(where='doccano_transformer'),
+    packages=find_packages(exclude=('tests',)),
     python_requires='>=3.5, <4',
     install_requires=['spacy', 'importlib-metadata'],
 )
