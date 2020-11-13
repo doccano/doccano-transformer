@@ -16,4 +16,9 @@ pytest-cov = "*"
 spacy = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
+
+[scripts]
+isort = "isort . -c"
+test = "pytest tests --cov=doccano_transformer --cov-report=term-missing -vv"
+flake8 = "flake8 doccano_transformer --ignore=F401,E741"
