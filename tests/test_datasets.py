@@ -1,17 +1,16 @@
 import json
 from collections import defaultdict
+from pathlib import Path
 from unittest import TestCase
-
-import pytest
 
 from doccano_transformer.datasets import NERDataset
 
 
 class TestNERDataset(TestCase):
-
-    @pytest.fixture(autouse=True)
-    def initdir(self, shared_datadir):
-        self.shared_datadir = shared_datadir / 'labeling'
+    @classmethod
+    def setUp(self):
+        current_path = Path(__file__).parent
+        self.shared_datadir = current_path / 'data' / 'labeling'
 
     def test_from_labeling_text_label_jsonl_to_conll2003(self):
         src_path = self.shared_datadir / 'labeling_text_label.jsonl'
@@ -50,7 +49,7 @@ class TestNERDataset(TestCase):
         for user, data in users.items():
             with open(self.shared_datadir / (filename + f'.user{user}')) as f:
                 expected = json.load(f)
-            print(data)
+            # print(data)
             self.assertEqual(data, expected)
 
     def test_from_labeling_jsonl_to_spacy(self):
