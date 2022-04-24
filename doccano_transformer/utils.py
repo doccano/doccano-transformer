@@ -1,3 +1,4 @@
+import json
 from typing import TYPE_CHECKING, List, Optional, Tuple
 
 if TYPE_CHECKING:
@@ -18,6 +19,13 @@ def read_csv(
         encoding: Optional[str] = 'utf-8'
 ) -> 'Dataset':
     return dataset.from_csv(filepath, encoding)
+
+def read_spacy(
+        filepath: str,
+        dataset: 'Dataset',
+        encoding: Optional[str] = 'utf-8'
+) -> 'Dataset':
+    return dataset.from_spacy(filepath, encoding)
 
 
 def split_sentences(text: str) -> List[str]:
@@ -120,3 +128,80 @@ def convert_tokens_and_offsets_to_spacy_tokens(
     for i, (token, offset) in enumerate(zip(tokens, offsets)):
         spacy_tokens.append(Token(token, offset, i))
     return spacy_tokens
+
+
+def from_spacy(f,user_id):
+
+    full_data_list = []
+
+    for data in json.load(f):
+
+        new_data = {
+            "id": data["id"],
+            "text": data['paragraphs'][0]['raw'],
+            
+        }
+        sentence_list = split_sentences(new_data["text"])
+
+        new_data["annotations"] = process_sentences(sentence_list,data['paragraphs'][0]['sentences'],user_id)
+        full_data_list.append(new_data)   
+
+        new_data["meta"] = {}
+        new_data["annotation_approver"] = None         
+    
+    return(full_data_list)
+
+
+def process_sentences(sentence_list,data,user_id):
+    
+    token_list = []
+    offset_start = 0
+    
+    for i in range(len(sentence_list)):
+            
+        tok_list = data[i]['tokens']
+        token_list+=process_tokens_list(tok_list,sentence_list[i],offset_start,user_id)
+        offset_start+=len(sentence_list[i])+1
+
+    return(token_list)
+
+
+def process_tokens_list(tok_list,sentence_list,offset_start,user_id):
+
+    token_list = []
+
+    words_list = [tok['orth'] for tok in tok_list]
+    type_list = [tok['ner'] for tok in tok_list]
+    offsets_list = get_offsets(sentence_list, words_list,offset_start)
+            
+    j = 0
+    while j<(len(words_list)):
+                
+        if type_list[j]!='O':
+
+            token_dict = {
+                'label': int(type_list[j].split('-')[1]),
+                'start_offset': offsets_list[j],
+                'end_offset': offsets_list[j] + len(words_list[j]),
+                'user': user_id
+            }
+
+            if "U" in type_list[j]:
+                token_list.append(token_dict)
+                        
+            if "B" in type_list[j]:
+
+                j+=1                    
+
+                while("I" in type_list[j]):
+                        
+                    token_dict['end_offset']+=  len(words_list[j])+1 
+                    j+=1
+                            
+                token_dict['end_offset']+= len(words_list[j])+1 
+                token_list.append(token_dict) 
+        j+=1
+
+    
+    return(token_list)
+

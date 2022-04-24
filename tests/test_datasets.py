@@ -64,3 +64,22 @@ class TestNERDataset(TestCase):
             with open(self.shared_datadir / (filename + f'.user{user}')) as f:
                 expected = json.load(f)
             self.assertEqual(data, expected)
+
+    def test_from_labeling_spacy_to_jsonl(self):
+        src_path = self.shared_datadir / 'labeling.spacy.user1'
+        filename = self.shared_datadir / 'labeling.user1.jsonl'
+        d = NERDataset.from_spacy(filepath=src_path)
+        data = next(d.to_jsonl())
+        with open(filename) as f:
+            expected = json.load(f)
+        self.assertEqual(data, dict(expected))
+
+    def test_from_multi_labeling_spacy_to_jsonl(self):
+        src_path = self.shared_datadir / 'labeling.spacy.user2'
+        filename = self.shared_datadir / 'labeling.user2.jsonl'
+        d = NERDataset.from_spacy(filepath=src_path,user_id=2)
+        data = d.to_jsonl()
+        with open(filename) as f:
+            expected = map(json.loads,f)
+            for d,e in zip(data,expected):
+                self.assertEqual(d, dict(e))
