@@ -109,3 +109,8 @@ class NERExample:
                 sentences.append({'tokens': tokens_for_spacy})
             data['sentences'] = sentences
             yield {'user': user, 'data': {'id': self.id, 'paragraphs': [data]}}
+
+    def to_jsonl(
+        self
+    ) -> Iterator[dict]:
+        yield self.raw

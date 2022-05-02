@@ -3,6 +3,7 @@ import json
 from typing import Any, Callable, Iterable, Iterator, List, Optional, TextIO
 
 from doccano_transformer.examples import Example, NERExample
+from doccano_transformer.utils import from_spacy
 
 
 class Dataset:
@@ -10,16 +11,21 @@ class Dataset:
         self,
         filepath: str,
         encoding: Optional[str] = 'utf-8',
-        transformation_func: Optional[Callable[[TextIO], Iterable[Any]]] = None
+        transformation_func: Optional[Callable[[TextIO], Iterable[Any]]] = None,
+        user_id: Optional[int] = None,
     ) -> None:
 
         self.filepath = filepath
         self.encoding = encoding
         self.transformation_func = transformation_func or (lambda x: x)
+        self.user_id = user_id
 
     def __iter__(self) -> Iterator[Any]:
         with open(self.filepath, encoding=self.encoding) as f:
-            yield from self.transformation_func(f)
+            if self.user_id:
+                yield from self.transformation_func(f,self.user_id)
+            else:
+                yield from self.transformation_func(f)
 
     @classmethod
     def from_jsonl(
@@ -33,6 +39,11 @@ class Dataset:
     ) -> 'Dataset':
         return cls(filepath, encoding, csv.DictReader)
 
+    @classmethod
+    def from_spacy(
+        cls, filepath: str, encoding: Optional[str] = 'utf-8',user_id: Optional[int]=1
+    ) -> 'Dataset':
+        return cls(filepath, encoding, from_spacy, user_id)
 
 class TaskDataset(Dataset):
     example_class: Example = None
@@ -58,3 +69,9 @@ class NERDataset(TaskDataset):
     ) -> Iterator[dict]:
         for example in self:
             yield from example.to_spacy(tokenizer)
+
+    def to_jsonl(
+        self,
+    ) -> Iterator[dict]:
+        for example in self:
+            yield from example.to_jsonl()
