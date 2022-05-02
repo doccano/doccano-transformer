@@ -131,10 +131,8 @@ def convert_tokens_and_offsets_to_spacy_tokens(
 
 
 def from_spacy(f,user_id):
-    """"
-    Spacy format parser
+    """"Spacy format parser
     """
-
     full_data_list = []
 
     for data in json.load(f):
@@ -153,10 +151,8 @@ def from_spacy(f,user_id):
 
 
 def process_sentences(sentence_list,data,user_id):
-    """"
-    Process a sentence in Spacy format
+    """"Process a sentence in Spacy format
     """
-    
     token_list = []
     offset_start = 0
     
@@ -170,10 +166,8 @@ def process_sentences(sentence_list,data,user_id):
 
 
 def process_tokens_list(tok_list,sentence_list,offset_start,user_id):
+    """Process list of token in Spacy format
     """
-    Process list of token in Spacy format
-    """
-
     token_list = []
 
     words_list = [tok['orth'] for tok in tok_list]
