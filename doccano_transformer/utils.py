@@ -131,6 +131,9 @@ def convert_tokens_and_offsets_to_spacy_tokens(
 
 
 def from_spacy(f,user_id):
+    """"
+    Spacy format parser
+    """
 
     full_data_list = []
 
@@ -138,41 +141,44 @@ def from_spacy(f,user_id):
 
         new_data = {
             "id": data["id"],
-            "text": data['paragraphs'][0]['raw'],
-            
+            "text": data['paragraphs'][0]['raw']
         }
         sentence_list = split_sentences(new_data["text"])
-
         new_data["annotations"] = process_sentences(sentence_list,data['paragraphs'][0]['sentences'],user_id)
-        full_data_list.append(new_data)   
-
+        full_data_list.append(new_data)
         new_data["meta"] = {}
-        new_data["annotation_approver"] = None         
-    
+        new_data["annotation_approver"] = None
+
     return(full_data_list)
 
 
 def process_sentences(sentence_list,data,user_id):
+    """"
+    Process a sentence in Spacy format
+    """
     
     token_list = []
     offset_start = 0
     
-    for i in range(len(sentence_list)):
+    for i,sentence in enumerate(sentence_list):
             
         tok_list = data[i]['tokens']
-        token_list+=process_tokens_list(tok_list,sentence_list[i],offset_start,user_id)
-        offset_start+=len(sentence_list[i])+1
+        token_list+=process_tokens_list(tok_list,sentence,offset_start,user_id)
+        offset_start+=len(sentence)+1
 
     return(token_list)
 
 
 def process_tokens_list(tok_list,sentence_list,offset_start,user_id):
+    """
+    Process list of token in Spacy format
+    """
 
     token_list = []
 
     words_list = [tok['orth'] for tok in tok_list]
     type_list = [tok['ner'] for tok in tok_list]
-    offsets_list = get_offsets(sentence_list, words_list,offset_start)
+    offsets_list = get_offsets(sentence_list, words_list, offset_start)
             
     j = 0
     while j<(len(words_list)):
@@ -191,15 +197,15 @@ def process_tokens_list(tok_list,sentence_list,offset_start,user_id):
                         
             if "B" in type_list[j]:
 
-                j+=1                    
+                j+=1
 
                 while("I" in type_list[j]):
                         
-                    token_dict['end_offset']+=  len(words_list[j])+1 
+                    token_dict['end_offset']+=len(words_list[j])+1
                     j+=1
                             
-                token_dict['end_offset']+= len(words_list[j])+1 
-                token_list.append(token_dict) 
+                token_dict['end_offset']+=len(words_list[j])+1
+                token_list.append(token_dict)
         j+=1
 
     

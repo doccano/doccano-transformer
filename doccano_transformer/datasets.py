@@ -38,13 +38,12 @@ class Dataset:
         cls, filepath: str, encoding: Optional[str] = 'utf-8'
     ) -> 'Dataset':
         return cls(filepath, encoding, csv.DictReader)
-    
+
     @classmethod
     def from_spacy(
         cls, filepath: str, encoding: Optional[str] = 'utf-8',user_id: Optional[int]=1
     ) -> 'Dataset':
         return cls(filepath, encoding, from_spacy, user_id)
-
 
 class TaskDataset(Dataset):
     example_class: Example = None
