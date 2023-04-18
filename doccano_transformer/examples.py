@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import Callable, Iterator, List, Optional
 
-from spacy.gold import biluo_tags_from_offsets
+from spacy.training import offsets_to_biluo_tags
 
 from doccano_transformer import utils
 
@@ -98,7 +98,7 @@ class NERExample:
                 tokens = utils.convert_tokens_and_offsets_to_spacy_tokens(
                     tokens, offsets
                 )
-                tags = biluo_tags_from_offsets(tokens, label)
+                tags = offsets_to_biluo_tags(tokens, label)
                 tokens_for_spacy = []
                 for i, (token, tag, offset) in enumerate(
                     zip(tokens, tags, offsets)
